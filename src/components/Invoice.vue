@@ -113,29 +113,78 @@
                 </div>
               </v-card-title>
               <v-card-text>
+              <v-toolbar color="white" flat>
+                <v-toolbar-title style="width: 50px;">No.</v-toolbar-title>
+                <v-toolbar-title>Work description</v-toolbar-title>
+                <v-toolbar-title style="width: 100px; margin: 0 15px; text-align: left">Price</v-toolbar-title>
+              </v-toolbar>
+              <v-divider></v-divider>
+              <draggable v-model="rows" element="v-list">
+
+                <v-list-tile
+                  v-for="(row, index) in rows"
+                    :key="index"
+                >
+                <div
+                class="subheading"
+                style="width: 40px; margin-right: 10px"
+                disabled
+                >{{index+1}}</div>
+                  <v-text-field
+                  v-model="row.description"
+                ></v-text-field>
+
+                  <v-text-field
+                  style="width: 100px; margin: 0 15px"
+                  v-model="row.price"
+                ></v-text-field>
+
+                  <v-list-tile-action>
+                    <v-btn flat small fab @click.prevent="removeRow(index)">
+                      <v-icon dark color="red">delete_forever</v-icon>
+                    </v-btn>
+                  </v-list-tile-action>
+                </v-list-tile>
+
+              </draggable>
+              <v-divider></v-divider>
+
                 <table class="table table-hover">
                   <thead>
                     <tr>
                       <th style="width: 20px;">No.</th>
                       <th>Description</th>
                       <th style="width: 130px;" class="text-right">Price</th>
-                      <th style="width: 200px;"></th>
+                      <th style="width: 100px;"></th>
                     </tr>
                   </thead>
                   <draggable v-model="rows" element="tbody">
                     <tr v-for="(row, index) in rows" :key="index">
                       <td> {{ index +1 }} </td>
                       <td>
-                        <input class="form-control" v-model="row.description"/>
-                      </td>
-                       <td>
-                        <input class="form-control text-right" v-model="row.price"/>
+                        <v-text-field
+                        solo
+                        v-model="row.description"
+                      ></v-text-field>
                       </td>
                       <td>
-                        <button class="btn btn-primary btn-xs" @click.prevent="addRow(index)">add row</button>
-                        <button class="btn btn-danger btn-xs" @click.prevent="removeRow(index)">remove row</button>
+                       <v-text-field
+                        solo
+                        v-model="row.price"
+                      ></v-text-field>
+                      </td>
+                      <td>
+                        <v-btn flat small fab @click.prevent="removeRow(index)">
+                          <v-icon dark color="red">delete_forever</v-icon>
+                        </v-btn>
                       </td>
                     </tr>
+
+                    <v-btn color="primary" dark slot="footer" @click.prevent="addRow">
+                      <v-icon>add</v-icon>
+                      Add row
+                    </v-btn>  
+
                   </draggable>
                   <tfoot>
                     <tr>
@@ -271,11 +320,10 @@ export default {
   },
   methods: {
     addRow: function(index) {
-      try {
-        this.rows.splice(index + 1, 0, {});
-      } catch (e) {
-        console.log(e);
-      }
+      this.rows.push({
+        description: '',
+        price: ''
+      })
     },
     removeRow: function(index) {
       this.rows.splice(index, 1);
