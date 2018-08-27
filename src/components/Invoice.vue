@@ -113,10 +113,12 @@
                 </div>
               </v-card-title>
               <v-card-text>
+              <v-divider></v-divider>
               <v-toolbar color="white" flat>
-                <v-toolbar-title style="width: 50px;">No.</v-toolbar-title>
-                <v-toolbar-title>Work description</v-toolbar-title>
-                <v-toolbar-title style="width: 100px; margin: 0 15px; text-align: left">Price</v-toolbar-title>
+                <v-toolbar-title style="width: 40px;">No.</v-toolbar-title>
+                <v-toolbar-title style="margin-left: 10px;">Work description</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-title style="width: 100px; margin: 0 70px 0 15px; text-align: left">Price</v-toolbar-title>
               </v-toolbar>
               <v-divider></v-divider>
               <draggable v-model="rows" element="v-list">
@@ -127,7 +129,7 @@
                 >
                 <div
                 class="subheading"
-                style="width: 40px; margin-right: 10px"
+                style="width: 40px; margin-right: 18px"
                 disabled
                 >{{index+1}}</div>
                   <v-text-field
@@ -135,7 +137,7 @@
                 ></v-text-field>
 
                   <v-text-field
-                  style="width: 100px; margin: 0 15px"
+                  style="max-width: 100px; margin: 0 15px"
                   v-model="row.price"
                 ></v-text-field>
 
@@ -148,52 +150,21 @@
 
               </draggable>
               <v-divider></v-divider>
-
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th style="width: 20px;">No.</th>
-                      <th>Description</th>
-                      <th style="width: 130px;" class="text-right">Price</th>
-                      <th style="width: 100px;"></th>
-                    </tr>
-                  </thead>
-                  <draggable v-model="rows" element="tbody">
-                    <tr v-for="(row, index) in rows" :key="index">
-                      <td> {{ index +1 }} </td>
-                      <td>
-                        <v-text-field
-                        solo
-                        v-model="row.description"
-                      ></v-text-field>
-                      </td>
-                      <td>
-                       <v-text-field
-                        solo
-                        v-model="row.price"
-                      ></v-text-field>
-                      </td>
-                      <td>
-                        <v-btn flat small fab @click.prevent="removeRow(index)">
-                          <v-icon dark color="red">delete_forever</v-icon>
-                        </v-btn>
-                      </td>
-                    </tr>
-
-                    <v-btn color="primary" dark slot="footer" @click.prevent="addRow">
-                      <v-icon>add</v-icon>
-                      Add row
-                    </v-btn>  
-
-                  </draggable>
-                  <tfoot>
-                    <tr>
-                      <td colspan="2" class="text-right">TOTAL</td>
-                      <td colspan="1" class="text-right">Total?</td>
-                      <td></td>
-                    </tr>
-                  </tfoot>
-                </table>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn style="margin: 0 90px 0 15px;" color="primary"  @click.prevent="addRow">
+                  <v-icon>add</v-icon>
+                  Add Row
+                </v-btn>
+              </v-card-actions>
+              <v-card-text>
+              <v-divider></v-divider>
+              <v-toolbar color="white" flat>
+                <v-spacer></v-spacer>
+                <v-toolbar-title >Total: </v-toolbar-title>
+                <v-toolbar-title style="width: 100px; margin: 0 70px 0 15px; text-align: left">123123</v-toolbar-title>
+              </v-toolbar>
               </v-card-text>
             </v-card>
           </v-flex>
